@@ -1,0 +1,38 @@
+Windows: WSL
+MacOS: Terminal or whatever you wanna use
+Linux: Terminal or whatever it's called
+
+
+1. Anaconda is activated
+
+source ~/anaconda/bin/activate
+
+
++ 1. make folder
++ 2. turn it into a Git repository
++ 3. push it to Github.
+
+
+mkdir: make a directory
+ls: list files
+    ls -a: list all files
+mv: move (rename) files
+cp: copy files
+    cp -r: copy directories (r stands for recursivbe)
+
+
+. is current folder
+.. is the parent folder
+
+
+git lets us track file versions
+
+git init: initializes git
+git status: status of the files in our git repo
+git log: log of all past commits in this repostiroy
+git clone: copies the git repo
+
+what is a commit? a commit is like a checkpoint
+
+
+if a filename has a period at the beginning, it's hidden.
