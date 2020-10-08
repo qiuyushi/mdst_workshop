@@ -1,55 +1,90 @@
-"""
-Intro to python exercises shell code
-"""
+import random
+import base64
 
-def is_odd(x):
+def part1(num):
     """
-    returns True if x is odd and False otherwise
+    Ask the user for a number. Depending on whether the number is even or odd,
+    print out an appropriate (i.e. "even" or "odd") message to the user.
     """
-    return x % 2 == 0
+    x = input("Enter a number")
+    x= int(x)
+    if(x % 2 == 0 ):
+        print("even")
+    else:
+        print("odd")
 
-def is_palindrome(word):
+def part2():
     """
-    returns whether `word` is spelled the same forwards and backwards
+    Generate a random number between 1 and 9 (including 1 and 9). Ask the user
+    to guess the number, then tell them whether they guessed too low, too high,
+    or exactly right.
+    (Hint: remember to use the user input lessons from the very first
+    exercise).
+    Keep the game going until the user types "exit".
+    [ try checking the random module in python on google. Concepts: Infinite
+    loops, if, else, loops and user/input].
     """
-    for i in range(1, len(word)):
-        if word[i] != word[-1 * i]:
-            return False
-    return True
+    x = random.randrange(1,10)
+    y = input("Guess a number")
+    while(str(y) != "exit"):
+        if(int(y) > x):
+            print("too high")
+        elif(int(y) < x):
+            print("too low")
+        else:
+            print("correct!")
+        y = input("Guess a number")
 
 
-def only_odds(numlist):
+def part3(string):
     """
-    returns a list of numbers that are odd from numlist
-
-    ex: only_odds([1, 2, 3, 4, 5, 6]) -> [1, 3, 5]
+    Ask the user for a string and print out whether this string is a palindrome
+    or not. (A palindrome is a string that reads the same forwards and
+    backwards.)
     """
-    count = 0
-    list = []
-    for num in numlist:
-        if is_odd(num):
-            list[count] = num
-            count += 1
-    return list
+    x = input("Enter a string")
+    y = x[::-1]
+    if x == y:
+        print("palindrome")
+    else:
+        print("not palindrome")
 
 
 
-def count_words(text):
+def part4a(filename, username, password):
     """
-    return a dictionary of {word: count} in the text
-
-    words should be split by spaces (and nothing else)
-    words should be converted to all lowercase
-
-    ex: count_words("How much wood would a woodchuck chuck"
-                    " if a woodchuck could chuck wood?")
-        ->
-        {'how': 1, 'much': 1, 'wood': 1, 'would': 1, 'a': 2, 'woodchuck': 2,
-        'chuck': 2, 'if': 1, 'could': 1, 'wood?': 1}
+    Encrypt your username and password using base64 module
+    Store your encrypted username on the first line and your encrypted password
+    on the second line.
     """
-    str_list = []
-    lines = text.split("\n")
-    for line in lines:
-        str_list += line.split
-    return str_list
+    f = open(filename, 'wb')
+    username = username.encode('ascii')
+    password=password.encode('ascii')
+    u = base64.b64encode(username)
+    p = base64.b64encode(password)
+    f.write(u)
+    f.write(p)
+    f.close()
 
+
+def part4b(filename, password=None):
+    """
+    Create a function to read the file with your login information.
+    Print out the decrypted username and password.
+    If a password is specified, update the file with the new password.
+    """
+    f = open(filename, 'rb')
+    user = f.read()
+    pwd = f.read()
+    user = base64.b64decode(user)
+    pwd = base64.b64decode(pwd)
+    print(user)
+    print(pwd)
+    f.close()
+
+
+if __name__ == "__main__":
+    part4a("secret.txt", "naitian", "p4ssw0rd")
+    part4b("secret.txt")
+    part4b("secret.txt", password="p4ssw0rd!")
+    part4b("secret.txt")
